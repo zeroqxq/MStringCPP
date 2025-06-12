@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.28.3)
+project(ModernString)
+
+set(CMAKE_CXX_STANDARD 26)
+
+
+add_executable(ModernString
+    mstring/mstring.cpp
+    mstring/include/stdafx.cpp
+    test.cpp
+)
+
+target_include_directories(ModernString PRIVATE
+    mstring/include
+    mstring/
+)
+
