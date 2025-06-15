@@ -16,6 +16,7 @@ mstring::mstring(){
 }
 
 size_t mstring::length(const char *str) {
+    if (str == nullptr) return 0;
     size_t length = 0;
     while (str[length] != '\0') {      
         length++;
@@ -24,6 +25,7 @@ size_t mstring::length(const char *str) {
 }
 
 size_t mstring::length() {
+    if (str == nullptr) return 0;
     return length(this->str);
 }
 
@@ -39,7 +41,7 @@ mstring& mstring::operator =(const mstring& other){
     if (this->str != nullptr){
         delete[] str;
     }
-    int len = length(other.str);
+    size_t len = length(other.str);
     this->str = new char[len + 1];
     for(int i = 0 ; i < len ; ++i){
         this->str[i] = other.str[i];
@@ -50,7 +52,7 @@ mstring& mstring::operator =(const mstring& other){
 
 
 mstring::mstring(const mstring& other){
-    int len = length(other.str);
+    size_t len = length(other.str);
     this->str = new char[len + 1];
     for(int i = 0 ; i < len ; i++){
         this->str[i] = other.str[i];
@@ -71,4 +73,48 @@ mstring mstring::operator+(const mstring& other){
     newStr.str[length(this->str) + length(other.str)] = '\0';
     return newStr;
 
+}
+
+
+
+mstring mstring::operator *(const int times) {
+    size_t len = ( length(this->str) * times );
+    mstring oldStr = this->str;
+    mstring newStr = "";
+    for (int i = 0; i < times; ++i) {
+        newStr = newStr + oldStr;
+    }
+    return newStr;    
+}
+
+
+bool mstring::operator ==(const mstring& other) {
+    if (length(other.str) != length(this->str)) return false;
+    for (int i = 0 ; i < length(this->str) ; ++i) {
+        if (this->str[i] != other.str[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool mstring::operator !=(const mstring& other) {
+    if (length(other.str) != length(this->str)) return true;
+    for (int i = 0 ; i < length(this->str) ; ++i) {
+        if (this->str[i] != other.str[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+char& mstring::operator [](const int index) {
+    return this->str[index];
+}
+
+
+mstring::mstring(mstring&& other) {
+    this->str = other.str;
+    other.str = nullptr;
 }

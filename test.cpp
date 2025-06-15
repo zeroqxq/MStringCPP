@@ -14,9 +14,12 @@ int main(int argc, char* argv[]){
     mstring str4 = "World";
     mstring str5 = str3 + str4; // Сложение строк
     std::cout << str5.value() << std::endl; 
-    return 0;   
+    mstring str6 = str3 * 3 ; // Дублирвование строки n раз
+    std::cout << str6.value() << std::endl; 
+    bool test = str3 == str4;
+    test = str3 != str4;
+    str3[0] = 'j';
+    std::cout << str3[0] << std::endl;
 
-    
-    
-    
+    return 0;      
 }
