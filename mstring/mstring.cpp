@@ -1,5 +1,5 @@
 #include "mstring.h"
-#include "include/stdafx.h"
+#include "include/include.h"
 
 
 mstring::mstring(const char *str){
