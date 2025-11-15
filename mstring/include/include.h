@@ -1,7 +1,6 @@
 /*
- * include.h - файл содержащий все включаемые во все файлы проекта бибилиотеки и модули
+ * include.h -  file with all include files
  */
-
 #pragma once
 #include <iostream>
 #include <vector>
