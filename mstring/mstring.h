@@ -20,7 +20,7 @@ public:
 
     size_t length();
 
-    char *value();
+    const char *value() const;
 
     mstring &operator=(const mstring &other);
 
@@ -37,3 +37,5 @@ public:
 private:
     char *str;
 };
+
+std::ostream &operator<<(std::ostream &stream, const mstring &obj);

@@ -41,24 +41,28 @@ mstring::~mstring()
     delete[] this->str;
 }
 
-char *mstring::value()
+const char *mstring::value() const
 {
     return this->str;
 }
 
 mstring &mstring::operator=(const mstring &other)
 {
-    if (this->str != nullptr)
+    if (this != &other)
     {
-        delete[] str;
+        if (this->str != nullptr)
+        {
+            delete[] str;
+        }
+
+        size_t len = length(other.str);
+        this->str = new char[len + 1];
+        for (int i = 0; i < len; ++i)
+        {
+            this->str[i] = other.str[i];
+        }
+        this->str[len] = '\0';
     }
-    size_t len = length(other.str);
-    this->str = new char[len + 1];
-    for (int i = 0; i < len; ++i)
-    {
-        this->str[i] = other.str[i];
-    }
-    this->str[len] = '\0';
     return *this;
 }
 
@@ -92,13 +96,31 @@ mstring mstring::operator+(const mstring &other)
 
 mstring mstring::operator*(const int times)
 {
-    size_t len = (length(this->str) * times);
-    mstring oldStr = this->str;
-    mstring newStr = "";
+    if (times <= 0)
+    {
+        return mstring();
+    }
+
+    size_t single_len = length(this->str);
+    size_t total_len = single_len * times;
+
+    mstring newStr;
+
+    if (newStr.str)
+        delete[] newStr.str;
+
+    newStr.str = new char[total_len + 1];
+
     for (int i = 0; i < times; ++i)
     {
-        newStr = newStr + oldStr;
+        for (size_t j = 0; j < single_len; ++j)
+        {
+            newStr.str[i * single_len + j] = this->str[j];
+        }
     }
+
+    newStr.str[total_len] = '\0';
+
     return newStr;
 }
 
@@ -142,4 +164,10 @@ mstring::mstring(mstring &&other)
 {
     this->str = other.str;
     other.str = nullptr;
+}
+
+std::ostream &operator<<(std::ostream &stream, const mstring &obj)
+{
+    stream << obj.value();
+    return stream;
 }

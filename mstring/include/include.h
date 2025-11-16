@@ -6,3 +6,4 @@
 #include <vector>
 #include <cstddef>
 #include <cstring>
+#include <ostream>
