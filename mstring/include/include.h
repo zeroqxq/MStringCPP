@@ -7,3 +7,5 @@
 #include <cstddef>
 #include <cstring>
 #include <ostream>
+#include <istream>
+#include <iomanip>

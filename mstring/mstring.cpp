@@ -171,3 +171,33 @@ std::ostream &operator<<(std::ostream &stream, const mstring &obj)
     stream << obj.value();
     return stream;
 }
+
+// TODO: Check for safety
+std::istream &operator>>(std::istream &stream, mstring &obj)
+{
+
+    const int BUFFER_SIZE = 1024;
+    char buffer[BUFFER_SIZE];
+
+    stream >> std::setw(BUFFER_SIZE) >> buffer;
+
+    if (stream.good())
+    {
+        if (obj.str)
+        {
+            delete[] obj.str;
+            obj.str = nullptr;
+        }
+
+        size_t len = obj.length(buffer);
+        obj.str = new char[len + 1];
+
+        for (int i = 0; i < len; ++i)
+        {
+            obj.str[i] = buffer[i];
+        }
+        obj.str[len] = '\0';
+    }
+
+    return stream;
+}

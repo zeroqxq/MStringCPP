@@ -34,8 +34,12 @@ public:
 
     char &operator[](const int index);
 
+    friend std::ostream &operator<<(std::ostream &stream, const mstring &obj);
+    friend std::istream &operator>>(std::istream &stream, mstring &obj);
+
 private:
     char *str;
 };
 
 std::ostream &operator<<(std::ostream &stream, const mstring &obj);
+std::istream &operator>>(std::istream &stream, const mstring &obj);
