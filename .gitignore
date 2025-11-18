@@ -20,8 +20,6 @@ build/
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
-Makefile
-CMakeLists.txt
 
 # Логи и временные файлы
 *.log
